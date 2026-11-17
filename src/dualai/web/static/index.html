@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="dualai-token" content="__DUALAI_TOKEN__">
+<title>Dual AI</title>
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css">
+<script type="module" src="/static/app.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Pular para a conversa</a>
+
+<div class="app" id="app">
+  <aside class="sidebar" id="sidebar" aria-label="Navegação do Dual AI">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"><span></span><span></span></span>
+      <span class="brand-name">Dual AI</span>
+    </div>
+    <button class="btn btn-block" id="new-task" type="button">Nova tarefa</button>
+    <h2 class="side-label" id="history-label">Histórico</h2>
+    <nav class="history" id="history" aria-labelledby="history-label"></nav>
+    <div class="side-foot">
+      <button class="side-item" id="repo-button" type="button"></button>
+      <button class="side-item" id="settings-button" type="button"></button>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+
+  <main class="main" id="main" tabindex="-1">
+    <header class="topbar" id="topbar"></header>
+    <div class="scroll" id="scroll"><div class="column" id="conversation"></div></div>
+    <div class="dock"><div class="column" id="dock"></div></div>
+  </main>
+</div>
+
+<dialog class="dialog" id="settings" aria-labelledby="settings-title">
+  <div class="dialog-head">
+    <h2 id="settings-title">Configurações</h2>
+    <button class="icon-btn" id="settings-close" type="button" aria-label="Fechar configurações"></button>
+  </div>
+  <div class="dialog-body">
+    <section aria-labelledby="set-repo">
+      <h3 id="set-repo">Repositório</h3>
+      <p class="path" id="repo-path">Nenhum repositório selecionado.</p>
+      <div class="row">
+        <button class="btn" id="repo-pick" type="button">Escolher pasta…</button>
+      </div>
+      <label class="field" for="repo-input">Ou cole o caminho da pasta</label>
+      <div class="row">
+        <input id="repo-input" type="text" spellcheck="false" autocomplete="off" placeholder="C:\projetos\meu-repo">
+        <button class="btn" id="repo-use" type="button">Usar</button>
+      </div>
+      <div class="recent" id="repo-recent"></div>
+      <p class="error" id="repo-error" role="alert" hidden></p>
+    </section>
+
+    <section aria-labelledby="set-tests">
+      <h3 id="set-tests">Comando de testes</h3>
+      <label class="field" for="test-cmd">Roda neste repositório depois de cada etapa do autor</label>
+      <input id="test-cmd" type="text" spellcheck="false" autocomplete="off" placeholder="python -m pytest -q">
+      <p class="warning" id="test-warning">Este comando executa código escrito pelos agentes, com as suas permissões e o seu ambiente. A cópia de trabalho fica separada do seu branch, mas não do seu computador. Use o Dual AI em repositórios em que você aceitaria rodar esse código.</p>
+      <div class="row">
+        <button class="btn btn-primary" id="test-save" type="button">Salvar comando</button>
+        <span class="saved" id="test-saved" role="status"></span>
+      </div>
+      <p class="error" id="test-error" role="alert" hidden></p>
+    </section>
+
+    <section aria-labelledby="set-fake">
+      <h3 id="set-fake">Modo de ensaio</h3>
+      <label class="check"><input type="checkbox" id="fake-toggle"><span>Usar agentes falsos, sem chamar Claude nem Codex</span></label>
+      <p class="hint">No primeiro uso, o ensaio vem ativado. Os agentes falsos não chamam Claude nem Codex; o comando de testes roda de verdade. Desmarcar ativa chamadas reais, que consomem a franquia dos seus planos ou geram custos de API, conforme a autenticação.</p>
+    </section>
+
+    <section aria-labelledby="set-theme">
+      <h3 id="set-theme">Aparência</h3>
+      <div class="segmented" role="radiogroup" aria-labelledby="set-theme">
+        <label><input type="radio" name="theme" value="dark"><span>Escuro</span></label>
+        <label><input type="radio" name="theme" value="light"><span>Claro</span></label>
+      </div>
+    </section>
+  </div>
+</dialog>
+
+<dialog class="dialog dialog-small" id="confirm" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+  <div class="dialog-body">
+    <h2 id="confirm-title"></h2>
+    <p id="confirm-text"></p>
+    <div class="row row-end">
+      <button class="btn" id="confirm-cancel" type="button">Cancelar</button>
+      <button class="btn btn-primary" id="confirm-ok" type="button"></button>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

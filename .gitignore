@@ -1,0 +1,57 @@
+# Ambiente Python e resultados locais
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+build/
+dist/
+*.egg-info/
+
+# Execuções e configuração local do Dual AI
+.dualai/
+
+# Variáveis e credenciais locais; exemplos sem valores podem ser versionados
+.env
+.env.*
+!.env.example
+!.env.sample
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+credentials.json
+credentials.local.json
+secrets.local.*
+
+# Sessões/configurações de ferramentas de IA, se copiadas para a pasta
+.codex/auth.json
+.codex/sessions/
+.codex/history.jsonl
+.codex/log/
+.codex/logs/
+.codex/*.db*
+.claude/.credentials.json
+.claude/settings.local.json
+.claude/projects/
+.claude/cache/
+.claude/session-env/
+.claude.json
+
+# Arquivos locais do editor e sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
